@@ -1,116 +1,103 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📔 My Diary Planner</title>
-    <link rel="stylesheet" href="css/style.css">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Diary Planner</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+height:100vh;
+background:linear-gradient(135deg,#333,#764ba2);
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+}
+
+.container{
+text-align:center;
+max-width:700px;
+padding:40px;
+}
+
+h1{
+font-size:48px;
+margin-bottom:10px;
+}
+
+p{
+font-size:18px;
+margin-bottom:40px;
+}
+
+.buttons{
+display:flex;
+justify-content:center;
+gap:20px;
+}
+
+button{
+padding:14px 30px;
+border:none;
+border-radius:10px;
+font-size:16px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.login{
+background:white;
+color:#333;
+}
+
+.signup{
+background:#ffd369;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+</style>
+
 </head>
+
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <h1>📔 My Diary Planner</h1>
-            <p>Organize your life, one entry at a time</p>
-        </header>
 
-        <!-- Navigation Tabs -->
-        <nav class="tabs">
-            <button class="tab-btn active" data-tab="diary">📝 Diary</button>
-            <button class="tab-btn" data-tab="meetings">🤝 Meetings</button>
-            <button class="tab-btn" data-tab="tasks">✅ Tasks</button>
-        </nav>
+<div class="container">
 
-        <!-- Diary Section -->
-        <section id="diary" class="tab-content active">
-            <div class="section-header">
-                <h2>📝 My Diary Entries</h2>
-                <button id="newDiaryBtn" class="btn btn-primary">+ New Entry</button>
-            </div>
-            <div id="diaryList" class="items-list"></div>
-        </section>
+<h1>📔 My Diary Planner</h1>
 
-        <!-- Meetings Section -->
-        <section id="meetings" class="tab-content">
-            <div class="section-header">
-                <h2>🤝 My Meetings</h2>
-                <button id="newMeetingBtn" class="btn btn-primary">+ New Meeting</button>
-            </div>
-            <div id="meetingsList" class="items-list"></div>
-        </section>
+<p>Write your thoughts, track meetings and manage tasks in one beautiful space.</p>
 
-        <!-- Tasks Section -->
-        <section id="tasks" class="tab-content">
-            <div class="section-header">
-                <h2>✅ My Tasks</h2>
-                <button id="newTaskBtn" class="btn btn-primary">+ New Task</button>
-            </div>
-            <div id="tasksList" class="items-list"></div>
-        </section>
-    </div>
+<div class="buttons">
 
-    <!-- Diary Modal -->
-    <div id="diaryModal" class="modal">
-        <div class="modal-content">
-            <span class="close" data-modal="diaryModal">&times;</span>
-            <h2>✨ New Diary Entry</h2>
-            <form id="diaryForm">
-                <input type="date" id="diaryDate" required placeholder="Date">
-                <select id="diaryMood">
-                    <option value="">Select Mood</option>
-                    <option value="😊 Happy">😊 Happy</option>
-                    <option value="😔 Sad">😔 Sad</option>
-                    <option value="😍 Loved">😍 Loved</option>
-                    <option value="😴 Tired">😴 Tired</option>
-                    <option value="😤 Frustrated">😤 Frustrated</option>
-                    <option value="😎 Confident">😎 Confident</option>
-                </select>
-                <input type="text" id="diaryTitle" required placeholder="Title">
-                <textarea id="diaryContent" required placeholder="Write your thoughts..."></textarea>
-                <button type="submit" class="btn btn-success">Save Entry</button>
-            </form>
-        </div>
-    </div>
+<a href="login.html">
+<button class="login">Login</button>
+</a>
 
-    <!-- Meetings Modal -->
-    <div id="meetingsModal" class="modal">
-        <div class="modal-content">
-            <span class="close" data-modal="meetingsModal">&times;</span>
-            <h2>🤝 New Meeting</h2>
-            <form id="meetingForm">
-                <input type="text" id="meetingTitle" required placeholder="Meeting Title">
-                <input type="date" id="meetingDate" required>
-                <input type="time" id="meetingTime" required>
-                <input type="text" id="meetingLocation" placeholder="Location">
-                <input type="text" id="meetingParticipants" placeholder="Participants (comma separated)">
-                <textarea id="meetingNotes" placeholder="Meeting notes..."></textarea>
-                <button type="submit" class="btn btn-success">Save Meeting</button>
-            </form>
-        </div>
-    </div>
+<a href="signup.html">
+<button class="signup">Sign Up</button>
+</a>
 
-    <!-- Tasks Modal -->
-    <div id="tasksModal" class="modal">
-        <div class="modal-content">
-            <span class="close" data-modal="tasksModal">&times;</span>
-            <h2>✅ New Task</h2>
-            <form id="taskForm">
-                <input type="text" id="taskTitle" required placeholder="Task Title">
-                <textarea id="taskDescription" placeholder="Task description..."></textarea>
-                <select id="taskPriority">
-                    <option value="Low">🟢 Low Priority</option>
-                    <option value="Medium" selected>🟡 Medium Priority</option>
-                    <option value="High">🔴 High Priority</option>
-                </select>
-                <input type="date" id="taskDueDate" placeholder="Due Date">
-                <button type="submit" class="btn btn-success">Save Task</button>
-            </form>
-        </div>
-    </div>
+</div>
 
-    <script src="js/app.js"></script>
-    <script src="js/diary.js"></script>
-    <script src="js/meetings.js"></script>
-    <script src="js/tasks.js"></script>
+</div>
+
 </body>
 </html>
+

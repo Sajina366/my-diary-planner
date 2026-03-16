@@ -1,32 +1,17 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const path = require('path');
-require('dotenv').config();
+const express = require("express");
+const cors = require("cors");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-// Middleware
+require("./config/database");
+
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
 
-// Database initialization
-const db = require('./config/database');
+app.use("/api/auth", require("./routes/auth"));
 
-// Routes
-app.use('/api/diary', require('./routes/diary'));
-app.use('/api/meetings', require('./routes/meetings'));
-app.use('/api/tasks', require('./routes/tasks'));
+app.use(express.static("public"));
 
-// Main page
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-// Start server
-app.listen(PORT, () => {
-  console.log(`🎉 My Diary Planner is running on http://localhost:${PORT}`);
+app.listen(3000, ()=>{
+console.log("Server running on port 3000");
 });
